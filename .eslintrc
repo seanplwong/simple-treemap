@@ -1,0 +1,64 @@
+{
+  "extends": [
+    "plugin:you-dont-need-lodash-underscore/compatible",
+    "plugin:promise/recommended",
+    "plugin:sonarjs/recommended",
+    "airbnb/hooks",
+    "airbnb",
+    "next",
+    "next/core-web-vitals"
+  ],
+  "parserOptions": {
+    "project": "./tsconfig.lint.json"
+  },
+  "plugins": [
+    "promise",
+    "sonarjs",
+    "you-dont-need-lodash-underscore",
+    "cypress"
+  ],
+  "overrides": [{
+    "files": ["**/*.ts?(x)"],
+    "parser": "@typescript-eslint/parser",
+    "extends": [
+      "plugin:you-dont-need-lodash-underscore/compatible",
+      "plugin:promise/recommended",
+      "plugin:sonarjs/recommended",
+      "airbnb-typescript",
+      "airbnb/hooks",
+      "next",
+      "next/core-web-vitals"
+    ],
+    "parserOptions": {
+      "sourceType": "module",
+      "ecmaFeatures": {
+        "jsx": true
+      },
+      "warnOnUnsupportedTypeScriptVersion": true
+    },
+    "rules": {
+      "no-multiple-empty-lines": ["error", { "max": 2 }],
+      "import/prefer-default-export": "off",
+      "react/require-default-props": "off"
+    }
+  }, {
+    "files": ["**/*.spec.ts", "cypress/**/*.ts"],
+    "extends": [
+      "plugin:you-dont-need-lodash-underscore/compatible",
+      "plugin:promise/recommended",
+      "plugin:sonarjs/recommended",
+      "airbnb-typescript",
+      "airbnb/hooks",
+      "next",
+      "next/core-web-vitals",
+      "plugin:cypress/recommended"
+    ],
+    "env": {
+      "cypress/globals": true
+    },
+    "rules": {
+      "sonarjs/no-duplicate-string": "off",
+      "import/no-extraneous-dependencies": "off"
+    }
+  }]
+}
