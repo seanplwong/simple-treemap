@@ -42,7 +42,7 @@
       "react/require-default-props": "off"
     }
   }, {
-    "files": ["**/*.spec.ts", "cypress/**/*.ts"],
+    "files": ["cypress/**/*.ts", "cypress/**/*.spec.ts"],
     "extends": [
       "plugin:you-dont-need-lodash-underscore/compatible",
       "plugin:promise/recommended",
@@ -58,6 +58,11 @@
     },
     "rules": {
       "sonarjs/no-duplicate-string": "off",
+      "import/no-extraneous-dependencies": "off"
+    }
+  }, {
+    "files": ["src/**/*.test.ts", "setupTests.ts"],
+    "rules": {
       "import/no-extraneous-dependencies": "off"
     }
   }]
