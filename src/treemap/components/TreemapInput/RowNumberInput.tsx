@@ -13,6 +13,7 @@ import {
 export interface RowNumberInputProps {
   onChange?(value: number): void;
   max: number;
+  defaultValue?: number;
 }
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
@@ -22,7 +23,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
   },
 }));
 
-export const RowNumberInput: FC<RowNumberInputProps> = ({ onChange, max }) => {
+export const RowNumberInput: FC<RowNumberInputProps> = ({ onChange, max, defaultValue }) => {
   const classes = useStyles();
   const [state, setState] = useState<'valid' | 'error'>('valid');
   const [errorMessage, setErrorMessage] = useState<string>();
@@ -34,8 +35,8 @@ export const RowNumberInput: FC<RowNumberInputProps> = ({ onChange, max }) => {
       throw new Error('Invalid number');
     }
 
-    if (parsed < 0) {
-      throw new Error('This field must be larger than 0');
+    if (parsed < 1) {
+      throw new Error('This field must be larger than 1');
     }
 
     if (parsed > max) {
@@ -75,7 +76,7 @@ export const RowNumberInput: FC<RowNumberInputProps> = ({ onChange, max }) => {
     inputValue.current = e.target.value;
 
     const parsed = validate(e.target.value);
-    if (!parsed) {
+    if (parsed === undefined) {
       return;
     }
 
@@ -93,6 +94,7 @@ export const RowNumberInput: FC<RowNumberInputProps> = ({ onChange, max }) => {
         onChange={handleChange}
         variant="outlined"
         helperText={errorMessage}
+        defaultValue={defaultValue}
       />
     </>
   );

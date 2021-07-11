@@ -15,7 +15,7 @@ export const TreemapInput: FC<TreemapInputProps> = ({
   onRowNumberChange,
   defaultData,
 }) => {
-  const [dataLength, setDataLength] = useState(0);
+  const [dataLength, setDataLength] = useState(defaultData?.length ?? 0);
   const handleDataChange = useCallback((list: DataEntry[]) => {
     onDataChange?.(list);
     setDataLength(list.length);
@@ -24,7 +24,7 @@ export const TreemapInput: FC<TreemapInputProps> = ({
   return (
     <>
       <DataInput onChange={handleDataChange} defaultValue={defaultData} />
-      <RowNumberInput onChange={onRowNumberChange} max={dataLength} />
+      <RowNumberInput onChange={onRowNumberChange} max={dataLength} defaultValue={dataLength} />
     </>
   );
 };

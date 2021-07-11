@@ -7,6 +7,8 @@ import { Layout } from '@/ui/components/Layout';
 import { Treemap } from '@/treemap/components/Treemap';
 import { clsx } from '@/vendor/clsx';
 import { TreemapInput } from '@/treemap/components/TreemapInput';
+import { useCallback, useState } from 'react';
+import { DataEntry } from '@/interface/treemap.interface';
 
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
@@ -16,6 +18,9 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
   },
   paper: {
     padding: theme.spacing(2),
+  },
+  treemap: {
+    height: '100%',
   },
 }));
 
@@ -30,6 +35,17 @@ const defaultData = [
 export default function IndexPage() {
   const classes = useStyles();
 
+  const [data, setData] = useState<DataEntry[]>(defaultData);
+  const [rowNumber, setRowNumber] = useState<number>();
+
+  const handleDataChange = useCallback((newData: DataEntry[]) => {
+    setData(newData);
+  }, []);
+
+  const handleRowNumberChange = useCallback((newRowNumber: number) => {
+    setRowNumber(newRowNumber);
+  }, []);
+
   return (
     <Layout>
       <Box className={classes.root}>
@@ -37,13 +53,15 @@ export default function IndexPage() {
           <Grid item xs={12} md={4}>
             <Paper className={clsx(classes.paper)}>
               <TreemapInput
-                defaultData={defaultData}
+                defaultData={data}
+                onDataChange={handleDataChange}
+                onRowNumberChange={handleRowNumberChange}
               />
             </Paper>
           </Grid>
           <Grid item xs={12} md={8}>
-            <Paper>
-              <Treemap />
+            <Paper className={classes.treemap}>
+              <Treemap data={data} rowNumber={rowNumber} />
             </Paper>
           </Grid>
         </Grid>
