@@ -20,6 +20,9 @@ yarn lint
 yarn start
 yarn test
 
+# e2e test
+yarn test:e2e
+
 # ci
 yarn ci
 ```

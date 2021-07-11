@@ -3,11 +3,12 @@ describe('index page', () => {
     cy.visit('/');
   });
 
-  it('renders hello world', () => {
-    cy.get('h1').first().should('have.text', 'Hello World');
+  it('renders the 2 rows when selecting 2 in the row input', () => {
+    cy.get('#data-input-label').first().should('have.text', 'Data');
+    cy.get('#row-input').first().clear().type('2');
 
-    cy.get('.MuiBox-root .MuiGrid-root .MuiGrid-root div').eq(0)
-      .should('have.text', 'Hello World');
+    cy.get('.MuiGrid-root.MuiGrid-container .MuiGrid-root.MuiGrid-container .MuiGrid-root.MuiGrid-container.MuiGrid-item.MuiGrid-grid-xs-12 div')
+      .should('have.length', 3);
   });
 
   // TODO: Error case testing
