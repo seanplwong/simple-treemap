@@ -6,7 +6,7 @@ import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import { Layout } from '@/ui/components/Layout';
 import { Treemap } from '@/treemap/components/Treemap';
 import { clsx } from '@/vendor/clsx';
-import { DataInput } from '@/treemap/components/DataInput';
+import { TreemapInput } from '@/treemap/components/TreemapInput';
 
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
@@ -15,11 +15,19 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
     paddingTop: theme.spacing(2),
   },
   paper: {
-    padding: theme.spacing(1),
+    padding: theme.spacing(2),
   },
 }));
 
-export default function EpisodePage() {
+const defaultData = [
+  { name: 'A', weight: 3, value: -0.02 },
+  { name: 'B', weight: 3, value: 0.05 },
+  { name: 'C', weight: 6, value: 0.015 },
+  { name: 'D', weight: 2, value: -0.01 },
+  { name: 'E', weight: 3, value: 0.01 },
+];
+
+export default function IndexPage() {
   const classes = useStyles();
 
   return (
@@ -28,7 +36,9 @@ export default function EpisodePage() {
         <Grid container spacing={3}>
           <Grid item xs={12} md={4}>
             <Paper className={clsx(classes.paper)}>
-              <DataInput />
+              <TreemapInput
+                defaultData={defaultData}
+              />
             </Paper>
           </Grid>
           <Grid item xs={12} md={8}>

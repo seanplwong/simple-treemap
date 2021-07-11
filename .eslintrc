@@ -39,7 +39,8 @@
     "rules": {
       "no-multiple-empty-lines": ["error", { "max": 2 }],
       "import/prefer-default-export": "off",
-      "react/require-default-props": "off"
+      "react/require-default-props": "off",
+      "promise/always-return": "off"
     }
   }, {
     "files": ["cypress/**/*.ts", "cypress/**/*.spec.ts"],
